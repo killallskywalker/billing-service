@@ -1,0 +1,34 @@
+services:
+  policy-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    image: policy-service:dev
+    container_name: policy-service
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: local
+    depends_on:
+      - postgres-service
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+  postgres-service:
+    image: postgres:15
+    container_name: postgres-service
+    restart: always
+    environment:
+      POSTGRES_USER: ${DATABASE_USERNAME:-developer}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD:-password}
+      POSTGRES_DB: ${DATABASE_NAME:-customer_billing_portal}
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./init:/docker-entrypoint-initdb.d
+    ports:
+      - "5433:5432"
+volumes:
+  db_data:
