@@ -95,7 +95,7 @@ export class BillingController {
   @Delete(':id')
   @HttpCode(204)
   @ApiOperation({ summary: 'Delete billing by product codes' })
-  @ApiQuery({ name: 'product_code', required: false, type: String })
+  @ApiParam({ name: 'id', required: false, type: String })
   @ApiResponse({ status: 204, description: 'Billing deleted successfully' })
   @ApiResponse({ status: 404, description: 'Billing not found' })
   @ApiBearerAuth()

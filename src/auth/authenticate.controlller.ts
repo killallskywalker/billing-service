@@ -10,7 +10,7 @@ export class AuthenticateController {
 
   @Get('generate')
   @ApiOperation({ summary: 'Generate a simple JWT token' })
-  @ApiQuery({ name: 'role', description: 'User role', example: 'admin' })
+  @ApiQuery({ name: 'role', description: 'User role', example: 'admin,user' })
   @ApiResponse({
     status: 200,
     description: 'JWT token as string',

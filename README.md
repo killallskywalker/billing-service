@@ -57,6 +57,11 @@ docker compose up
 
 # If you want developer mode ( run test etc ) 
 docker compose -f docker-compose.dev.yml up 
+
+# for this you need to run on your own migration and seed
+docker exec -it policy-service npm run migration:run
+docker exec -it policy-service npm run db:seed
+
 ```
 4 . Then you can access the swagger 
 ```
